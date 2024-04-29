@@ -1,4 +1,4 @@
-package API.Database;
+package Util.Database;
 
 public class Query {
 }

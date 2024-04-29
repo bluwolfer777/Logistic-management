@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<CONFIG>
-    <IP></IP> <!-- accepted values: loopback, first, [ip address] -->
-    <PORT></PORT> <!-- accepted all ports -->
-    <SECURITY-POLICY>
-        <ENFORCE2FA></ENFORCE2FA> <!-- boolean values in low caps -->
-        <PASSWORD-POLICY></PASSWORD-POLICY> <!-- accepted values: none, soft, strict -->
-    </SECURITY-POLICY>
-</CONFIG>
