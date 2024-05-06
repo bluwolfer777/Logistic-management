@@ -8,7 +8,6 @@ public class Connector {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://" + host + "/" + database,username,password);
-
         } catch(Exception e){
             System.out.println(e);
         }
