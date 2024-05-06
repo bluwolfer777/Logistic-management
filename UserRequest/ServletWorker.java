@@ -3,14 +3,7 @@ package UserRequest;
 import java.io.*;
 import javax.servlet.*;
 
-public class ServletWorker implements Servlet {
-    ServletConfig config=null;
-
-    public void init(ServletConfig config){
-        this.config=config;
-        System.out.println("servlet is initialized");
-    }
-
+public class ServletWorker extends GenericServlet {
     public void service(ServletRequest req,ServletResponse res)
             throws IOException,ServletException{
 
@@ -18,11 +11,8 @@ public class ServletWorker implements Servlet {
 
         PrintWriter out=res.getWriter();
         out.print("<html><body>");
-        out.print("<b>hello simple servlet</b>");
+        out.print("<b>hello generic servlet</b>");
         out.print("</body></html>");
 
     }
-    public void destroy(){System.out.println("servlet is destroyed");}
-    public ServletConfig getServletConfig(){return config;}
-    public String getServletInfo(){return "copyright 2007-1010";}
 }
