@@ -1,0 +1,13 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <servlet-class>MessageAPI</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
+</web-app>

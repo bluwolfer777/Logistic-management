@@ -1,4 +1,4 @@
-package API.Util.Database;
+package Util.Database;
 
 import java.sql.*;
 

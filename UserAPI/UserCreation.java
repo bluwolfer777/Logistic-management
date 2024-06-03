@@ -1,4 +1,4 @@
-package API.User;
+package UserAPI;
 
 public class UserCreation {
 }
