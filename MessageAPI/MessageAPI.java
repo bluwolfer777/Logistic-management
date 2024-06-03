@@ -1,5 +1,8 @@
 package MessageAPI;
 
+import UserAPI.User;
+import UserAPI.UserManagement;
+
 import javax.servlet.http.*;
 import javax.servlet.*;
 import java.io.*;
@@ -32,13 +35,29 @@ public class MessageAPI extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = request.getParameter("op");
+        String password, email, name, surname;
+        User user;
         switch (operation) {
             case "":
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 break;
+            case "0":
+                email = request.getParameter("email");
+                password = request.getParameter("password");
+                break;
             case "1":
-                String userName = request.getParameter("username");
-                String password = request.getParameter("password");
+                email = request.getParameter("email");
+                password = request.getParameter("password");
+                surname = request.getParameter("surname");
+                name = request.getParameter("name");
+                user = new User(email,name,surname,password);
+                try {
+                    UserManagement.create(user);
+                } catch (Exception e) {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("User already exists");
+                    response.getWriter().close();
+                }
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);

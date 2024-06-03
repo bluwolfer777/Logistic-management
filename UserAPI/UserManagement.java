@@ -20,11 +20,18 @@ public class UserManagement {
             throw new Exception("User Already Exist");
         }
     }
-    public static void login(User user, String session) throws SQLException {
+    public static void login(User user, int session) throws SQLException {
         Connector connector = new Connector("root","root","192.168.56.101","logistic");
-        ResultSet rs = connector.query("SELECT count(*) FROM user WHERE email='" + user.email + "' AND password='" + user.password + "';");
-        if (rs.getInt("count(*)") == 1) {
-
+        ResultSet control = connector.query("SELECT count(*) FROM user WHERE email='" + user.email + "' AND password='" + user.password + "';");
+        if (control.getInt("count(*)") == 1) {
+            int user_id = connector.query("SELECT id FROM user WHERE email='" + user.email + "';").getInt("id");
+            connector.insert("INSERT INTO session (id, user_id, last_login)" +
+                    " VALUES (" + session + ", "+ user_id +", NOW());");
         }
+    }
+
+    public static void logout(int session) throws SQLException {
+        Connector connector = new Connector("root","root","192.168.56.101","logistic");
+        connector.insert("DELETE FROM session WHERE id='"+session+"';");
     }
 }
