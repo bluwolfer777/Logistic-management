@@ -14,8 +14,6 @@ public class UserAPI {
      * @author Leon Rosamilia
      * @param request the http request
      * @param response the http response
-     * @throws ServletException
-     * @throws IOException
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException,IOException
@@ -27,8 +25,6 @@ public class UserAPI {
      * @author Leon Rosamilia
      * @param request the http request
      * @param response the http response
-     * @throws ServletException
-     * @throws IOException
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,10 +55,12 @@ public class UserAPI {
                 user = new User(email,name,surname,password);
                 try {
                     UserManagement.create(user);
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     response.setContentType("text/plain");
                     response.getWriter().write("User already exists");
                     response.getWriter().close();
+                } catch (Exception ex){
+                    response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
                 }
                 break;
             case "2":
