@@ -124,17 +124,26 @@
     function updateChats() {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
-            document.getElementById("txtHint").innerHTML = this.responseText;
+            var chats = xhttp.responseText.split(";")
+            for(let i = 0; i < chats.length; i++){
+                chats[i] = JSON.parse(chats[i]);
+            }
+            for(chat in chats) {
+                document.getElementById("chats").appendChild(chat);
+            }
         }
         xhttp.open("POST", "http://localhost:5000/MessageAPI");
         xhttp.send("op=0");
-        var chats = xhttp.responseText.split(";")
-        for(let i = 0; i < chats.length; i++){
-            chats[i] = JSON.parse(chats[i]);
+    }
+
+    function updateMessages(name) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("messages").innerHTML = this.responseText;
         }
-        for(chat in chats) {
-            document.getElementById("chats").appendChild(chat);
-        }
+        xhttp.open("POST", "http://localhost:5000/MessageAPI");
+        xhttp.send("op=1&chat=" + name);
+        document.getElementById("messages").innerHTML = xhttp.responseText;
     }
 </script>
 </body>

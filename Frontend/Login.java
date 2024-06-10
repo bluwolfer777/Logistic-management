@@ -2,6 +2,7 @@ package Frontend;
 
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +19,17 @@ public class Login extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException,IOException
     {
-        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        Cookie[] cook = request.getCookies();
+        if (cook.length != 0) {
+            response.sendRedirect( "/chats.html");
+        }
+        else {
+            response.sendRedirect( "/login.html");
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 }
