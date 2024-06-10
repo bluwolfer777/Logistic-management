@@ -11,6 +11,13 @@ public class Message {
         this.text = text;
     }
 
+    public Message(User from, User to, String text,String sendTime) {
+        this.from = from;
+        this.to = to;
+        this.text = text;
+        this.sendTime = sendTime;
+    }
+
     public String toJSON() {
         return "{\"Message\":{" +
                 "\"from\": " + from.toJSON() + "\"," +
