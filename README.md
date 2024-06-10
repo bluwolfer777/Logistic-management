@@ -2,6 +2,16 @@
 ## using java servlets
 
 ---
+### Description
+This application was a school project made for sharpening java skills, the objective was to create a web based chat app with servlets as backend running using Apache Tomcat, at the actual status the project is incomplete and not working
+
+---
+### Requirements
+- Java 19 or newer
+- Apache Tomcat 9 or newer
+- MySQL 5 or newer (if you want to use MySQL 8 pay attention to use the legacy user login system)
+
+---
 ### Class diagram
 ![](diagram.png)
 
@@ -13,8 +23,8 @@ chat-app
     WEB-INF
         classes
 ```
-under the ``WEB-INF`` directory paste the `` web.xml`` file<br>
-under the ``classes`` directory paste the following classes and packages:
+1) under the ``WEB-INF`` directory paste the `` web.xml`` file and the ``web`` folder<br>
+2) under the ``classes`` directory paste the following classes and packages:
 - MessageAPI
 - UserAPI
 - Util
