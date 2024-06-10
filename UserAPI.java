@@ -2,13 +2,14 @@ import Util.Generator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import UserAPI.*;
 
-public class UserAPI {
+public class UserAPI extends HttpServlet{
     // DB: 192.168.56.101:3306
     /**
      * @author Leon Rosamilia
