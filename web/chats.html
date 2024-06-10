@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #f4f4f4;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 15px;
+            cursor: pointer;
+        }
+        .sidebar li:hover {
+            background-color: #ddd;
+        }
+        .chat-window {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+        }
+        .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        .message {
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-container button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <ul id="chats">
+        <li onclick="selectChat('Chat 1')">Chat 1</li>
+        <li onclick="selectChat('Chat 2')">Chat 2</li>
+        <li onclick="selectChat('Chat 3')">Chat 3</li>
+    </ul>
+</div>
+<div class="chat-window">
+    <div class="chat-header" id="chat-header">Seleziona una chat</div>
+    <div class="messages" id="messages"></div>
+    <div class="input-container">
+        <input type="text" id="message-input" placeholder="Scrivi un messaggio..." />
+        <button onclick="sendMessage()">Invia</button>
+    </div>
+</div>
+
+<script>
+    let currentChat = '';
+
+    function selectChat(chatName) {
+        currentChat = chatName;
+        document.getElementById('chat-header').innerText = chatName;
+        document.getElementById('messages').innerHTML = '';
+    }
+
+    function sendMessage() {
+        if (currentChat === '') {
+            alert('Seleziona una chat prima di inviare un messaggio.');
+            return;
+        }
+
+        const input = document.getElementById('message-input');
+        const message = input.value.trim();
+
+        if (message === '') {
+            return;
+        }
+
+        const messagesDiv = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.innerText = message;
+        messagesDiv.appendChild(messageDiv);
+
+        input.value = '';
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+    }
+
+    function updateChats() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("txtHint").innerHTML = this.responseText;
+        }
+        xhttp.open("POST", "http://localhost:5000/MessageAPI");
+        xhttp.send("op=0");
+        var chats = xhttp.responseText.split(";")
+        for(let i = 0; i < chats.length; i++){
+            chats[i] = JSON.parse(chats[i]);
+        }
+        for(chat in chats) {
+            document.getElementById("chats").appendChild(chat);
+        }
+    }
+</script>
+</body>
+</html>
