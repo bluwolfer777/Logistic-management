@@ -3,7 +3,7 @@
 
 ---
 ### Description
-This application was a school project made for sharpening java skills, the objective was to create a web based chat app with servlets as backend running using Apache Tomcat, at the actual status the project is incomplete and not working
+This application was a school project made for sharpening java skills, the objective was to create a web based chat app with servlets as backend running using Apache Tomcat, at the actual status the project is incomplete and not working but planning to finish it in the 2024 summer
 
 ---
 ### Requirements
